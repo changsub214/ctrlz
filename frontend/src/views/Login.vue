@@ -55,7 +55,21 @@ export default {
     }),
   methods:{
     login(){
-
+      this.$axios.post("/users/loginCheck",{
+        email:this.email,
+      })
+      .then(function(res){
+        if(res.data.sucess == true){
+          alert(res.data.name);
+          this.$router.push("")
+        }
+        else{
+          alert(res.data.message);
+        }
+      })
+      .catch(function(err){
+          alert(err);
+      })
     }
   }
 }

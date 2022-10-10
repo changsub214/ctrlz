@@ -1,5 +1,5 @@
 <template>
-    <v-form v-model="valid" method="post" action ="/regist">
+    <v-form v-model="valid">
         <v-container style="max-width: 450px" fill-height>
             <v-card>
                 <div class="pa-10">
