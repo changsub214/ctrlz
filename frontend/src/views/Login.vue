@@ -61,7 +61,7 @@ export default {
       .then(function(res){
         if(res.data.sucess == true){
           alert(res.data.name);
-          this.$router.push("")
+          //this.$router.push("")
         }
         else{
           alert(res.data.message);

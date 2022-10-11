@@ -44,7 +44,7 @@ router.post('/signUp',function(req,res){
 });
 router.post('/loginCheck',function(req,res){
   var email = req.body.email;
-  var query = connection.query('select email from emails where email = "'+email+'"',function(err,row){
+  var query = connection.query('select * from emails where email = "'+email+'"',function(err,row){
     if(row[0]==undefined){
       res.json({
         success: false,
