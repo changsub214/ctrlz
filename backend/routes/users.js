@@ -1,5 +1,10 @@
 var express = require('express');
 var mysql = require('mysql');
+var router = express.Router();
+var app = express();
+
+app.use(express.json())
+
 var connection = mysql.createConnection({
   host: 'localhost',
   port:'3306',
@@ -44,7 +49,7 @@ router.post('/signUp',function(req,res){
 });
 router.post('/loginCheck',function(req,res){
   var email = req.body.email;
-  var query = connection.query('select email from emails where email = "'+email+'"',function(err,row){
+  var query = connection.query('select * from emails where email = "'+email+'"',function(err,row){
     if(row[0]==undefined){
       res.json({
         success: false,
@@ -52,11 +57,13 @@ router.post('/loginCheck',function(req,res){
       })
     }
     else{
+      console.log(row[0].name)
       res.json({
         success: true,
         message: 'Login Success',
         name: row[0].name
       })
+      
     }
   })
 })
