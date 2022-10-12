@@ -1,5 +1,5 @@
 export const data = {
     isLogin : true,
     email:'',
-    name:'',
+    name:'UnDefined',
   };

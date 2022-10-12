@@ -44,6 +44,7 @@
   </template>
 
 <script>
+import {data} from "@/data"
 export default {
   data: () => ({
       valid: false,
@@ -58,10 +59,11 @@ export default {
       this.$axios.post("/users/loginCheck",{
         email:this.email,
       })
-      .then(function(res){
-        if(res.data.sucess == true){
+      .then((res)=>{
+        if(res.data.success == true){
           alert(res.data.name);
-          this.$router.push("")
+          data.name = res.data.name
+          this.$router.push("/sec")
         }
         else{
           alert(res.data.message);

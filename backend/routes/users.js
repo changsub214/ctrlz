@@ -2,6 +2,28 @@ var express = require('express');
 var mysql = require('mysql');
 var router = express.Router();
 var app = express();
+var path = require('path');
+const multer = require('multer');
+const fs = require('fs');
+
+try{
+  fs.readdirSync('uploads');
+} catch(err){
+  console.log('MAKE DIR');
+  fs.mkdirSync('uploads');
+}
+
+const upload= multer({
+  storage:multer.diskStorage({
+      destination(req,file,done){
+          done(null,'uploads/')
+      },
+      filename(req,file,done){
+          const ext = path.extname(file.originalname)
+          done(null,path.basename(file.originalname,ext)+Date.now()+ext);
+      }
+  })
+})
 
 app.use(express.json())
 
@@ -19,11 +41,11 @@ connection.connect(function(err) {
     throw err;
   }
 });
-var router = express.Router();
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
   res.send('respond with a resource');
+  console.log('log')
 });
 router.post('/signUp',function(req,res){
   var email = req.body.email;
@@ -67,5 +89,18 @@ router.post('/loginCheck',function(req,res){
     }
   })
 })
+router.get('/inf',function(req,res){
+  connection.query('select * from emails',function(err,rows){
+    if(err) throw err;
+    res.send(rows)
+    console.log(rows)
+  })
+})
+
+router.post('/',upload.single('image'),(req,res)=>{
+  console.log(req.file,req.body);
+  res.send('OK')
+})
+
 
 module.exports = router;
