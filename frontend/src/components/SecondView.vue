@@ -26,7 +26,7 @@ export default {
         upload(){
             const formData = new FormData();
             formData.append('image',this.image)
-            this.$axios.post("/users/",formData)
+            this.$axios.post("/files/upload",formData)
         },
         selectFile(file){
             this.image = file;

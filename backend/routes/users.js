@@ -4,26 +4,9 @@ var router = express.Router();
 var app = express();
 var path = require('path');
 const multer = require('multer');
-const fs = require('fs');
 
-try{
-  fs.readdirSync('uploads');
-} catch(err){
-  console.log('MAKE DIR');
-  fs.mkdirSync('uploads');
-}
 
-const upload= multer({
-  storage:multer.diskStorage({
-      destination(req,file,done){
-          done(null,'uploads/')
-      },
-      filename(req,file,done){
-          const ext = path.extname(file.originalname)
-          done(null,path.basename(file.originalname,ext)+Date.now()+ext);
-      }
-  })
-})
+
 
 app.use(express.json())
 
@@ -97,10 +80,6 @@ router.get('/inf',function(req,res){
   })
 })
 
-router.post('/',upload.single('image'),(req,res)=>{
-  console.log(req.file,req.body);
-  res.send('OK')
-})
 
 
 module.exports = router;
