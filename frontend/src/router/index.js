@@ -34,9 +34,10 @@ const routes = [
         ]
     },
     {
-        path:'/sec',
+        path:'/sec/:id',
         name:'Second',
-        component : Second
+        component : Second,
+        props : true
     }
 ]
 

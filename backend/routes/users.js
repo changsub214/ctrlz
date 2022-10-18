@@ -2,11 +2,6 @@ var express = require('express');
 var mysql = require('mysql');
 var router = express.Router();
 var app = express();
-var path = require('path');
-const multer = require('multer');
-
-
-
 
 app.use(express.json())
 
@@ -30,6 +25,7 @@ router.get('/', function(req, res, next) {
   res.send('respond with a resource');
   console.log('log')
 });
+
 router.post('/signUp',function(req,res){
   var email = req.body.email;
   var name = req.body.name;

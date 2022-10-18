@@ -63,7 +63,8 @@ export default {
         if(res.data.success == true){
           alert(res.data.name);
           data.name = res.data.name
-          this.$router.push("/sec")
+          data.email = this.email
+          this.$router.push({name: 'Second',params:{id:data.email}})
         }
         else{
           alert(res.data.message);

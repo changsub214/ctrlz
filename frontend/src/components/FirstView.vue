@@ -4,11 +4,8 @@
     <v-navigation-drawer permanent expand-on-hover>
       <v-list-item>
         <v-list-item-content>
-          <v-list-item-title class="text-h6">
-            Name
-          </v-list-item-title>
           <v-list-item-subtitle>
-            email@gmail.com
+            로그인 후 서비스 이용 바람
           </v-list-item-subtitle>
         </v-list-item-content>
       </v-list-item>
