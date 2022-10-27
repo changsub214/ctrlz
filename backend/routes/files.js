@@ -37,19 +37,19 @@ const upload= multer({
             done(null,'uploads/')
         },
         filename(req,file,done){
-            const ext = path.extname(file.originalname)
-            done(null,path.basename(file.originalname,ext)+Date.now()+ext);
+          file.originalname = Buffer.from(file.originalname,'latin1').toString('utf8')
+            done(null,Date.now()+file.originalname);
         }
     })
 })
 
 router.post('/upload',upload.single('image'),(req,res)=>{
-    var sql = {email:req.body.email,filename:req.body.name,filepath:req.file.path};
+    var sql = {email:req.body.email,filename:req.file.originalname,filepath:req.file.path};
     var query = connection.query('insert into images set ?',sql,function(err,rows){
       if(err){throw err}
       console.log(rows)
     })
-    console.log(req.body.email);
+    console.log(req.body.email)
     console.log(req.body.name)
     res.send(req.file)
   })

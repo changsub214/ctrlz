@@ -1,6 +1,7 @@
 <template>
     <v-col>
         <h>Welcome {{ $route.params.id }}</h>
+        <v-btn to ="/">log out</v-btn>
     <form enctype="multipart/form-data">
         <v-file-input
         v-model="image"
@@ -45,7 +46,6 @@ export default {
         upload(){
             const formData = new FormData();
             formData.append('image',this.image)
-            formData.append('name',this.image.name)
             formData.append('email',this.$route.params.id)
             this.$axios.post("/files/upload",formData,{
                 headers:{
@@ -59,13 +59,14 @@ export default {
             
         },
         updateImage(){
+            this.image = []
             const params = {email:this.$route.params.id}
             this.$axios.get('/files/getImage',{params})
                 .then(res=>{
                     this.images = res.data
                 }
             )
-            console.log("이미지 경로 : ",this.images.filepath)
+            //console.log("이미지 경로 : ",this.images.filepath)
         },
         deleteImage(path){
             console.log(path)
