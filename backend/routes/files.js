@@ -65,9 +65,11 @@ router.post('/deleteImage',(req,res)=>{
   fs.unlink(req.body.filepath,(err)=>{
     if(err) throw err;
   })
-  console.log(req.body.email,req.body.filepath)
-  const query = connection.query('delete from images where email = "'+req.body.email+'"and filepath = "'+req.body.filepath+'"',function(err){
+  const filepath = "uploads\\"+req.body.filepath.substring(7)
+  console.log("수정 된 경로:",filepath)
+  const query = connection.query('delete from images where email = "'+req.body.email+'"and filepath = "'+filepath+'"',function(err){
     if(err) throw err;
+    res.send("삭제 완료")
   })
 })
 module.exports = router;

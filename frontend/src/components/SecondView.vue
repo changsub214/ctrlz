@@ -53,7 +53,7 @@ export default {
                 }
             })
             .then(res =>{
-                console.log(res,"res upload")
+                console.log(res)
                 this.updateImage();
             })
             
@@ -65,7 +65,7 @@ export default {
                     this.images = res.data
                 }
             )
-            console.log(this.images.filepath,"images")
+            console.log("이미지 경로 : ",this.images.filepath)
         },
         deleteImage(path){
             console.log(path)
