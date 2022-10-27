@@ -5,6 +5,7 @@ const multer = require('multer');
 var router = express.Router();
 var app = express();
 const fs = require('fs');
+const { CONNREFUSED } = require('dns');
 
 app.use(express.json())
 
@@ -58,6 +59,15 @@ router.get('/getImage',(req,res)=>{
     if(err) throw err;
     res.send(row)
     console.log(row)
+  })
+})
+router.post('/deleteImage',(req,res)=>{
+  fs.unlink(req.body.filepath,(err)=>{
+    if(err) throw err;
+  })
+  console.log(req.body.email,req.body.filepath)
+  const query = connection.query('delete from images where email = "'+req.body.email+'"and filepath = "'+req.body.filepath+'"',function(err){
+    if(err) throw err;
   })
 })
 module.exports = router;

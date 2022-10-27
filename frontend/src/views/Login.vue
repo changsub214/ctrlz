@@ -6,7 +6,7 @@
               <v-card>
                 <div class="pa-10">
                   <h1 style="text-align: center" class="mb-10">Login</h1>
-                  <form>
+                  <form v-on:submit.prevent>
                     <v-text-field
                       v-model="email"
                       label="Email"
