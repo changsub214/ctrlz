@@ -71,8 +71,8 @@ router.post('/loginCheck',function(req,res){
 router.get('/inf',function(req,res){
   connection.query('select * from emails',function(err,rows){
     if(err) throw err;
-    res.send(rows)
-    console.log(rows)
+    res.send(rows);
+    console.log(rows);
   })
 })
 
