@@ -72,4 +72,26 @@ router.post('/deleteImage',(req,res)=>{
     res.send("삭제 완료")
   })
 })
+
+router.post('/deleteUser',(req,res)=>{
+  const query = connection.query('select filepath from images where email = "'+req.body.email+'"',function(err,row){
+    if(err) throw err;
+    console.log(row)
+    row.foreach(f =>{
+      fs.unlink(f,(err)=>{
+        if(err) throw err;
+      })
+    })
+    res.send("삭제 완료")
+  })
+})
+
+router.get('/inf',function(req,res){
+  connection.query('select * from images',function(err,rows){
+    if(err) throw err;
+    res.send(rows)
+    console.log(rows)
+  })
+})
+
 module.exports = router;

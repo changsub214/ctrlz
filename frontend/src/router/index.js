@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Login from '@/views/Login'
 import SignUp from '@/views/SignUp'
 import Manual from '@/views/Manual'
+import MyAccount from '@/views/My'
 
 import First from '@/components/FirstView'
 import Second from '@/components/SecondView'
@@ -37,7 +38,14 @@ const routes = [
         path:'/sec/:id',
         name:'Second',
         component : Second,
-        props : true
+        props : true,
+        children:[
+            {
+                path:'/myaccount',
+                name:'MyAccount',
+                component : MyAccount
+            }
+        ]
     }
 ]
 

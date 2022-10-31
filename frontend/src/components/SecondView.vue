@@ -1,7 +1,11 @@
 <template>
     <v-col>
         <h>Welcome {{ $route.params.id }}</h>
-        <v-btn to ="/">log out</v-btn>
+        <div>
+            <v-btn to ="/">로그아웃</v-btn>
+            <v-btn>회원 탈퇴</v-btn>
+        </div>
+       
     <form enctype="multipart/form-data">
         <v-file-input
         v-model="image"
@@ -26,6 +30,7 @@
     <v-divider></v-divider>
     </div>
 </v-col>
+
 </template>
 
 <script>
@@ -78,6 +83,13 @@ export default {
                 console.log(res)
                 this.updateImage();
             })
+        },
+        deleteUser(){
+            console.log("Delete user")
+            this.$axios.post('/files/deleteUser',{email:this.$route.params.id})
+                .then(res=>{
+                    console.log(res)
+                })
         }
     }
 }
