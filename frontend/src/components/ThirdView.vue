@@ -312,10 +312,10 @@ import Drawing from '../views/Drawing.vue';
             this.$refs.childComponent.linedrawing()
           },
           click_save(){
-            this.$refs.childComponent.linedrawing()
+            this.$refs.childComponent.save()
           },
           click_load(){
-            this.$refs.childComponent.linedrawing()
+            this.$refs.childComponent.load()
           },
 
       }

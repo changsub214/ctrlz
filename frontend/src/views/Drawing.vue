@@ -19,7 +19,7 @@ var canvas;
 var line;
 var isDown;
 var isLineDrawingMode = false;
-
+var json;
 var isRedoing = false;
 var h = [];
 var _clipboard = false;
@@ -227,6 +227,30 @@ export default {
             canvas.off('mouse:move')
             canvas.off('mouse:up')
         }
+        },
+        save(){
+            const json = JSON.stringify(canvas)
+            console.log(json)
+            const element = document.createElement('a');
+            element.setAttribute('href','data:text/plain;charset=utf-8,'+encodeURIComponent(json))
+            element.setAttribute('download','임시.txt');
+            document.body.appendChild(element);
+            element.click();
+            document.body.removeChild(element)
+        },
+        load(){
+            const input = document.createElement('input')
+            input.type = 'file'
+            input.accept = 'text/plain'
+            input.onchange = function(){
+                const file = new FileReader()
+                file.onload = () =>{
+                    canvas.clear()
+                    canvas.loadFromJSON(file.result)
+                }
+                file.readAsText(this.files[0])
+            }
+            input.click()
         },
 
     }
