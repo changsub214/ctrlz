@@ -16,6 +16,8 @@
       <v-btn icon @click = "click_pen"><v-icon>mdi-pen</v-icon></v-btn>
       <v-btn icon @click = "click_save"><v-icon>mdi-file-download</v-icon></v-btn>
       <v-btn icon @click = "click_load"><v-icon>mdi-file-upload</v-icon></v-btn>
+      <v-btn icon @click = "click_pngsave"><v-icon>mdi-image</v-icon></v-btn>
+      <v-btn icon @click = "click_store"><v-icon>mdi-update</v-icon></v-btn>
     </v-app-bar>
 
     <v-navigation-drawer
@@ -316,6 +318,12 @@ import Drawing from '../views/Drawing.vue';
           },
           click_load(){
             this.$refs.childComponent.load()
+          },
+          click_pngsave(){
+            this.$refs.childComponent.pngsave()
+          },
+          click_store(){
+            this.$refs.childComponent.store()
           },
 
       }

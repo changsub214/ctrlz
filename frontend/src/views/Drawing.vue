@@ -31,7 +31,7 @@ export default {
         }
     },
     mounted() {
-        canvas = new fabric.Canvas('c',{isDrawingMode: false})
+        canvas = new fabric.Canvas('c',{isDrawingMode: false , backgroundColor : "#fff",backgroundImage:null})
 
         canvas.on('object:added',function(){
             if(!isRedoing){
@@ -252,7 +252,25 @@ export default {
             }
             input.click()
         },
+        pngsave(){
+            const dataURL = canvas.toDataURL({
+                width: canvas.width,
+                height: canvas.height,
+                left: 0,
+                top: 0,
+                format: 'png',
+            });
+            const link = document.createElement('a');
+            link.download = 'test.png';
+            link.href = dataURL;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        },
+        store(){
+            
 
+        },
     }
 
 }
