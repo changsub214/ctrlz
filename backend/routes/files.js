@@ -53,12 +53,24 @@ router.post('/upload',upload.single('image'),(req,res)=>{
     console.log(req.body.name)
     res.send(req.file)
   })
+router.post('/uploadJSON',upload.single('txt'),(req,res)=>{
+  var sql = {filename:req.body.filename,jsonname:req.file.originalname,jsonpath:req.file.path}
+  var query = connection.query('insert into jsons set ?',sql,function(err,rows){
+    if(err){throw err}
+  })
+})
 router.get('/getImage',(req,res)=>{
   console.log('getImage')
   var query = connection.query('select filepath,filename from images where email ="'+req.query.email+'"',function(err,row){
     if(err) throw err;
     res.send(row)
     console.log(row)
+  })
+})
+router.get('/getJSON',(req,res)=>{
+  var query = connection.query('select jsonpath from jsons where filename = "'+req.query.filename+'"',function(err,row){
+    if(err) throw err;
+    res.send(row)
   })
 })
 router.post('/deleteImage',(req,res)=>{
