@@ -268,8 +268,31 @@ export default {
             document.body.removeChild(link);
         },
         store(){
-            
+            const input = document.createElement('input')
+            input.type = 'file'
+            input.accept = 'image/png'
+            input.onchange = function(){
+                //캔버스 초기화
+                canvas.setBackgroundColor('', canvas.renderAll.bind(canvas));
+                canvas.setBackgroundImage(0, canvas.renderAll.bind(canvas));
+                const file = new FileReader()
+                file.onload = (f) =>{              
+                    var data = f.target.result;
+                    fabric.Image.fromURL(data, function (img) {
+                        img.set({
+                            width: canvas.getWidth(),
+                            height: canvas.getHeight(),
+                            originX: 'left',
+                            originY: 'top'
+                        });
+                        canvas.setBackgroundImage(img, canvas.renderAll.bind(canvas));
+                    });
+                }
+                file.readAsDataURL(this.files[0])
+            }
+            input.click()
 
+            
         },
     }
 
